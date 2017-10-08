@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link href="src/css/main.css" rel="stylesheet" type="text/css" media="all">
+    <title>demo_aboutcomponents</title>
+  </head>
+  <body>
+    <div id="app">
+
+
+      <light-bulb></light-bulb>
+      <light-bulb></light-bulb>
+      <light-bulb></light-bulb>
+
+      <!--mixin -->
+      <hr/>
+      <div>
+        <man></man>
+        <cat></cat>
+        <hr/>
+        <greeter></greeter>
+        <super-greeter></super-greeter>
+      </div>
+      
+      <!--+++++++++++++++++++++
+        slot
+      +++++++++++++++++++++++++-->
+      <!--named slot-->
+      <hr/>
+      <organogram>
+        <div slot="boss">
+          <figure>
+            <img src="http://lorempixel.com/210/210/cats/1"/>
+            <figcaption>Sylvester</figcaption>
+          </figure>
+        </div>
+        <cat slot="employee" :name="catName"></cat>
+      </organogram>
+
+      <!--scope slot-->
+      <hr/>
+      <organogram-scope-slot>
+        <template scope="props">
+          <div v-if="props.type === 'boss' ">
+            <figure>
+              <img src="http://lorempixel.com/210/210/cats/1"/>
+              <figcaption>Sylvester</figcaption>
+            </figure>
+          </div>
+          <div v-else-if="props.type === 'employee' "
+            :class="'r' + props.rank">
+            <!--use methods instead computed, so it can be invoked several times-->
+            <cat :name="catName2()"></cat>
+          </div>
+        </template>
+      </organogram-scope-slot>
+      
+      <!--loading components asynchronously-->
+      <hr/>
+      <span v-if="loading">loading. . . </span>
+      <xuande-period-vase></xuande-period-vase>
+
+      <!--recursive component-->
+      <ul>
+          <taxon-tree :tree="living" taxon="living"></taxon-tree>
+      </ul>
+    </div>
+    <script src="/dist/build.js"></script>
+  </body>
+</html>
